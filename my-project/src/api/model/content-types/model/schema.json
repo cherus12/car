@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "models",
+  "info": {
+    "singularName": "model",
+    "pluralName": "models",
+    "displayName": "model",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "marks": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::mark.mark",
+      "inversedBy": "model"
+    },
+    "body": {
+      "type": "string"
+    },
+    "generation": {
+      "type": "string"
+    },
+    "engine": {
+      "type": "string"
+    },
+    "drive": {
+      "type": "string"
+    },
+    "transmission": {
+      "type": "string"
+    },
+    "color": {
+      "type": "string"
+    },
+    "year": {
+      "type": "string"
+    }
+  }
+}

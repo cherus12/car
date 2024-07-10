@@ -1,0 +1,157 @@
+.chat-wrapper {
+	width: 60%;
+	height: 100%;
+	display: flex;
+	position: fixed;
+	right: 0;
+	top: 0;
+	background-color: white;
+	box-shadow: 0 2px 10px 0 #0003;
+	z-index: 3;
+	transition: all 0.3s ease-in;
+
+	.chat-sidebar {
+		flex: 30%;
+		border-right: 1px solid #0000001a;
+
+		.chat-sidebar-container {
+			width: 100%;
+			height: 100%;
+			.chat-sidebar-top {
+				width: 100%;
+				height: 15%;
+				position: relative;
+				padding-left: 15px;
+
+				h1 {
+					margin: 0;
+				}
+
+				.chat-sidebar-title {
+					display: flex;
+					align-items: center;
+					gap: 15px;
+
+					.btn-close {
+						cursor: pointer;
+					}
+				}
+			}
+			.chat-sidebar-bottom {
+				width: 100%;
+				height: 85%;
+
+				.chat-sidebar-card {
+					display: flex;
+					padding: 16px;
+					cursor: pointer;
+
+					.chat-sidebar-card-img {
+						margin-right: 15px;
+						img {
+							width: 80px;
+							height: 80px;
+							border-radius: 10px;
+						}
+					}
+
+					.chat-sidebar-card-right {
+						.chat-card-title {
+						}
+
+						.chat-card-subject {
+							color: grey;
+						}
+					}
+
+					&:hover {
+						background-color: #f3f4f6;
+					}
+				}
+			}
+		}
+	}
+	.chat-right {
+		flex: 70%;
+
+		.chat-right-head {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			border-bottom: 1px solid black;
+			padding: 25px;
+
+			.chat-right-head-title {
+			}
+			.chat-right-head-status {
+			}
+		}
+		.chat-right-pinned-car {
+			display: flex;
+			padding: 10px;
+			border-bottom: 1px solid black;
+
+			.chat-right-pinned-car-image {
+				margin-right: 15px;
+				img {
+					width: 48px;
+				}
+			}
+
+			.chat-right-pinned-car-info {
+				.chat-right-pinned-car-price {
+				}
+				.chat-right-pinned-car-link-title {
+					a {
+						color: blue;
+					}
+				}
+			}
+		}
+		.chat {
+			width: 100%;
+			height: 100%;
+
+			.messages {
+				width: 100%;
+				height: 70%;
+				padding-bottom: 10px;
+			}
+
+			.chat-input {
+				padding: 0 20px;
+
+				.chat-border {
+					border: 1px solid black;
+					border-radius: 25px;
+					padding: 7px 20px;
+					display: flex;
+
+					.chat-icons {
+						img {
+							width: 24px;
+							height: 40px;
+						}
+					}
+					.chat-input-text {
+						width: 100%;
+						height: 40px;
+						display: flex;
+						align-items: center;
+						.chat-input-textarea {
+							display: block;
+							overflow: hidden;
+							box-sizing: border-box;
+							width: 100%;
+							padding-top: 15px;
+							resize: none;
+							border: none;
+							outline: none;
+							background-color: initial;
+						}
+					}
+				}
+			}
+		}
+	}
+}

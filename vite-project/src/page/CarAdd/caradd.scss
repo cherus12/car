@@ -1,0 +1,257 @@
+.card-add {
+	width: 100%;
+	height: 100%;
+	.card-add__container {
+		.offer {
+			width: 50%;
+			margin: 25px auto;
+			padding: 25px;
+			border-radius: 5px;
+			box-shadow: 0 4px 24px #0000000a;
+
+			.offer-title {
+				margin-bottom: 15px;
+			}
+
+			.offer-phone {
+				display: flex;
+				.offer-phone-text {
+					flex: 50%;
+				}
+				.offer-phone-time {
+					flex: 40%;
+					display: flex;
+				}
+			}
+
+			.offer-photo {
+				width: 100%;
+				height: 200px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border: 1px solid #0000001f;
+				border-radius: 5px;
+
+				&:hover {
+					background-color: #3a4b6514;
+					cursor: pointer;
+				}
+				input {
+					height: auto;
+					position: relative;
+					cursor: pointer;
+					// border: 1px solid #0000001f;
+					// border-radius: 5px;
+					// outline: none;
+				}
+				svg {
+					width: 24px;
+				}
+			}
+
+			.offer-input {
+				height: 60px;
+				margin-top: 15px;
+				padding: 0 10px;
+				border: 1px solid #0000001f;
+				border-radius: 5px;
+
+				&:hover {
+					border-color: #157ee180;
+				}
+
+				.text-offer {
+					width: 100%;
+					height: 100%;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					.text-placeholder {
+						color: grey;
+					}
+					.text-input {
+						input {
+							width: 100%;
+							border: none;
+							outline: none;
+							font-size: 15px;
+						}
+					}
+				}
+			}
+
+			.__small {
+				width: 90%;
+			}
+
+			.offer-characteristic {
+				margin-top: 15px;
+				h1 {
+					margin-bottom: 15px;
+				}
+
+				.__characteristic {
+					display: block;
+					padding: 20px 0;
+					border-top: 1px solid #f2f2f7;
+					cursor: pointer;
+
+					.characteristic-top {
+						height: inherit;
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						.characteristic-left {
+							color: grey;
+							font-size: 18px;
+						}
+						.characteristic-right {
+							display: flex;
+							align-items: center;
+							font-size: 18px;
+
+							input {
+								text-align: end;
+								padding-right: 10px;
+								border: none;
+								outline: none;
+							}
+
+							.arrow-down {
+								rotate: -90deg;
+								transition: all 0.3s ease-in;
+							}
+						}
+					}
+
+					.characteristic-bottom {
+						display: none;
+						grid-template-columns: repeat(4, 1fr);
+						grid-template-rows: repeat(2, auto);
+						gap: 20px;
+
+						.characteristic-button {
+							all: unset;
+							display: flex;
+							border: 1px solid grey;
+							align-items: center;
+							justify-content: center;
+							border-radius: 15px;
+
+							&:hover {
+								background-color: #157ee180;
+							}
+						}
+					}
+				}
+				.active {
+					height: 180px;
+
+					.characteristic-bottom {
+						display: grid;
+						margin-top: 25px;
+						transition: all 0.2s ease-in;
+					}
+
+					.characteristic-top {
+						height: 19px;
+					}
+
+					.arrow-down {
+						transform: rotate(180deg);
+						transition: all 0.3s ease-in;
+					}
+				}
+			}
+
+			.textarea-box {
+				width: 100%;
+				height: 100%;
+
+				textarea {
+					width: 100%;
+					min-height: 250px;
+					resize: none;
+					overflow: hidden;
+					border: 1px solid #0000001f;
+					border-radius: 5px;
+					outline: none;
+
+					&:focus {
+						border-color: #94d1ee;
+					}
+				}
+			}
+
+			.find-items.show {
+				display: block;
+			}
+
+			.find-items.close {
+				display: none;
+			}
+
+			.find-items {
+				display: none;
+				width: 100%;
+				min-height: 20px;
+				margin: 20px 0;
+
+				.find-items-links {
+					display: grid;
+					grid-template-columns: repeat(4, 1fr);
+					gap: 8px;
+
+					.find-item-link {
+						color: grey;
+						border: 1px solid #3a4b6514;
+						background-color: #3a4b6514;
+						border-radius: 5px;
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+						padding: 10px;
+						cursor: pointer;
+
+						&:hover {
+							background-color: #0d77eb;
+							color: white;
+						}
+
+						.find-item-image {
+							img {
+								width: 48px;
+							}
+						}
+						.find-item-name {
+						}
+					}
+				}
+			}
+		}
+
+		.button-submit {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+
+			Button {
+				width: 54%;
+				border-radius: 15px;
+				background-color: #e2effd;
+				color: #0d77eb;
+
+				&:hover {
+					background-color: #0d77eb;
+					color: white;
+				}
+			}
+		}
+
+		h1 {
+			margin: 0;
+		}
+	}
+}

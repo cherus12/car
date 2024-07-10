@@ -1,0 +1,87 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cars",
+  "info": {
+    "singularName": "car",
+    "pluralName": "cars",
+    "displayName": "car",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "mark": {
+      "type": "string"
+    },
+    "model": {
+      "type": "string"
+    },
+    "year_of_release": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string"
+    },
+    "generation": {
+      "type": "string"
+    },
+    "engine": {
+      "type": "string"
+    },
+    "drive": {
+      "type": "string"
+    },
+    "transmission": {
+      "type": "string"
+    },
+    "color": {
+      "type": "string"
+    },
+    "photo": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "desc": {
+      "type": "text"
+    },
+    "price": {
+      "type": "integer"
+    },
+    "modification": {
+      "type": "string"
+    },
+    "availability": {
+      "type": "string"
+    },
+    "marks": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::mark.mark",
+      "inversedBy": "cars"
+    },
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "mileage": {
+      "type": "integer"
+    },
+    "users_permissions_users": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "cars"
+    },
+    "phone": {
+      "type": "string"
+    }
+  }
+}

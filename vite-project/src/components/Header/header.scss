@@ -1,0 +1,73 @@
+.header-modal-item {
+	display: flex;
+	min-width: 240px;
+	position: relative;
+	align-items: center;
+	padding: 0 20px;
+	background-color: white;
+	cursor: pointer;
+
+	.header-menu-item {
+		color: black;
+		background-color: white;
+		padding-left: 40px;
+		width: 100%;
+
+		svg {
+			width: 25px;
+			color: black;
+			position: absolute;
+			left: 0;
+		}
+
+		&:hover {
+			background-color: white;
+			color: red;
+			fill: red;
+		}
+	}
+}
+
+.header-modal-user {
+	display: flex;
+	padding-left: 20px;
+
+	.header-modal-user-info {
+		color: black;
+		padding-left: 10px;
+
+		div {
+			padding-top: 2px;
+		}
+	}
+
+	img {
+		width: 40px;
+		border-radius: 50%;
+		margin-bottom: 5px;
+	}
+}
+
+.header-link-item {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	cursor: pointer;
+	margin: 0 8px;
+
+	&:hover {
+		color: red;
+	}
+
+	svg {
+		width: 24px;
+	}
+
+	a {
+		border: 1px solid #36b555;
+		background-color: #36b555;
+		padding: 10px 12px;
+		border-radius: 5px;
+		margin-left: 10px;
+	}
+}

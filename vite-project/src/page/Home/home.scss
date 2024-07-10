@@ -1,0 +1,83 @@
+.main {
+	.main__container {
+		.buttons-group {
+		}
+
+		.mark-logo-group {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 12px;
+
+			a {
+				&:hover {
+					opacity: 0.5;
+				}
+				img {
+					width: 64px;
+					height: 64px;
+				}
+			}
+		}
+
+		.index-marks {
+			width: 100%;
+			min-height: 400px;
+			position: relative;
+
+			.index-marks-items {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 20px;
+
+				.index-marks-item {
+					display: flex;
+
+					.index-marks-name {
+						color: black;
+
+						&:hover {
+							color: red;
+						}
+					}
+					.index-marks-count {
+						color: grey;
+						margin-left: 10px;
+					}
+				}
+			}
+			// background-color: black;
+			.index-marks-button {
+				position: absolute;
+				display: flex;
+				align-items: center;
+				bottom: 0;
+				right: 0;
+
+				.restore-btn {
+					display: flex;
+					align-items: center;
+					margin-right: 10px;
+					padding: 7px 10px;
+					border-radius: 5px;
+					background-color: rgb(238, 237, 237);
+
+					cursor: pointer;
+				}
+			}
+		}
+
+		.recommendations {
+			display: flex;
+			align-items: center;
+
+			img {
+				width: 24px;
+				height: 24px;
+			}
+
+			h1 {
+				margin-left: 10px;
+			}
+		}
+	}
+}
