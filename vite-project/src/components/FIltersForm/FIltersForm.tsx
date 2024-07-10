@@ -9,7 +9,7 @@ import {
 	Select,
 	TextField,
 } from '@mui/material'
-import { FiltersFormModal } from '../FiltersFormModal/FiltersFormModal'
+import { FiltersFormModal } from './FiltersFormModal/FiltersFormModal.js'
 import useFetch from '../../hooks/useFetch.jsx'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
@@ -110,7 +110,7 @@ export const FIltersForm = () => {
 			? [...chooseItemModel, item]
 			: chooseItemModel.filter(model => model != item)
 		setChooseItemModel(updatedModels)
-		setValue('models', updatedModels.join(','))
+		setValue('model', updatedModels.join(','))
 	}
 
 	const handleWriting = e => {
@@ -307,7 +307,7 @@ export const FIltersForm = () => {
 											placeholder={'Модель'}
 											value={chooseItemModel}
 											disabled={chooseItem.length < 1}
-											{...register('models')}
+											{...register('model')}
 										/>
 										{openModal == 'models' && (
 											<FiltersFormModal
