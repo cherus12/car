@@ -6,12 +6,14 @@ import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import useFetch from '../../hooks/useFetch.jsx'
 import { Characteristic } from '../../components/Characteristic/Characteristic.js'
+import { Input } from '../../Ui/Input/Input.js'
+import { SelectTime } from '../../Ui/Select/SelectTime.js'
 
 export const CarAdd = () => {
 	const { register, handleSubmit } = useForm()
 
 	const [markName, setMarkName] = useState(null)
-	// const [model, setModel] = useState(null)
+	const [model, setModel] = useState(null)
 	const [chooseItem, setChooseItem] = useState(null)
 
 	const [type, setType] = useState(null)
@@ -153,17 +155,12 @@ export const CarAdd = () => {
 						</div>
 
 						<div className='offer-mark' onClick={() => handleName('marks')}>
-							<div className='offer-input'>
-								<div className='text-offer'>
-									<div className='text-placeholder'>Марка</div>
-									<div className='text-input'>
-										<input
-											onChange={e => setMarkName(e.target.value)}
-											value={markName}
-										/>
-									</div>
-								</div>
-							</div>
+							<Input
+								title={'Марка'}
+								placeholder={'BMW'}
+								set={setMarkName}
+								value={markName}
+							></Input>
 							{data?.length > 0 ? (
 								<div
 									className={`find-items ${type == 'marks' ? 'show' : 'close'}`}
@@ -201,18 +198,13 @@ export const CarAdd = () => {
 							)}
 						</div>
 						<div className='offer-model' onClick={() => handleName('models')}>
-							<div className='offer-input'>
-								<div className='text-offer'>
-									<div className='text-placeholder'>Модель</div>
-									<div className='text-input'>
-										<input
-											type='text'
-											value={chooseItem?.title || ''}
-											onChange={e => setModel(e.target.value)}
-										/>
-									</div>
-								</div>
-							</div>
+							<Input
+								title={'Модель'}
+								placeholder={'iX'}
+								set={setModel}
+								value={chooseItem?.title || ''}
+							></Input>
+
 							{markName && data.length > 0 && (
 								<div
 									className={`find-items ${
@@ -320,19 +312,11 @@ export const CarAdd = () => {
 						<div className='offer-title'>
 							<h1>Пробег</h1>
 						</div>
-
-						<div className='offer-input'>
-							<div className='text-offer'>
-								<div className='text-placeholder'>км</div>
-								<div className='text-input'>
-									<input
-										type='text'
-										placeholder='11 111'
-										{...register('mileage')}
-									/>
-								</div>
-							</div>
-						</div>
+						<Input
+							title={'км'}
+							placeholder={'11 111'}
+							register={register('mileage')}
+						></Input>
 					</div>
 
 					<div className='offer'>
@@ -368,62 +352,25 @@ export const CarAdd = () => {
 						<div className='offer-title'>
 							<h1>Контакты</h1>
 						</div>
-						<div className='offer-input'>
-							<div className='text-offer'>
-								<div className='text-placeholder'>Как к вам обращаться?</div>
-								<div className='text-input'>
-									<input
-										type='text'
-										placeholder='Частное лицо'
-										{...register('name')}
-									/>
-								</div>
-							</div>
-						</div>
-						<div className='offer-input'>
-							<div className='text-offer'>
-								<div className='text-placeholder'>
-									Электронная почта(e-mail)
-								</div>
-								<div className='text-input'>
-									<input
-										type='text'
-										placeholder='name@mail.ru'
-										{...register('email')}
-									/>
-								</div>
-							</div>
-						</div>
+						<Input
+							title={'Как к вам обращаться?'}
+							placeholder={'Частное лицо'}
+							register={register('name')}
+						></Input>
+						<Input
+							title={'Электронная почта(e-mail)'}
+							placeholder={'name@mail.ru'}
+							register={register('email')}
+						></Input>
+
 						<div className='offer-phone'>
-							<div className='offer-phone-text'>
-								<div className='offer-input __small'>
-									<div className='text-offer'>
-										<div className='text-placeholder'>Номер телефона</div>
-										<div className='text-input'>
-											<input
-												type='text'
-												placeholder='+7 123 123 1231'
-												{...register('phone')}
-											/>
-										</div>
-									</div>
-								</div>
-							</div>
+							<Input
+								title={'Номер телефона'}
+								placeholder={'+7 123 123 1231'}
+								register={register('phone')}
+							></Input>
 							<div className='offer-phone-time'>
-								<FormControl sx={{ m: 1, minWidth: 120, marginTop: '16px' }}>
-									<Select
-										value={''}
-										displayEmpty
-										inputProps={{ 'aria-label': 'Without label' }}
-									>
-										<MenuItem value=''>
-											<em>Седан</em>
-										</MenuItem>
-										<MenuItem value={10}>Ten</MenuItem>
-										<MenuItem value={20}>Twenty</MenuItem>
-										<MenuItem value={30}>Thirty</MenuItem>
-									</Select>
-								</FormControl>
+								<SelectTime></SelectTime>
 								<FormControl sx={{ m: 1, minWidth: 120, marginTop: '16px' }}>
 									<Select
 										value={''}
@@ -446,17 +393,11 @@ export const CarAdd = () => {
 						<div className='offer-title'>
 							<h1>Цена</h1>
 						</div>
-						<div className='offer-input'>
-							<div className='text-offer'>
-								<div className='text-input'>
-									<input
-										type='text'
-										placeholder='1 000 000'
-										{...register('price')}
-									/>
-								</div>
-							</div>
-						</div>
+						<Input
+							title={'Цена'}
+							placeholder={'1 000 000'}
+							register={register('price')}
+						></Input>
 					</div>
 					<div className='button-submit'>
 						<Button onClick={handleSubmit(onSubmit)}>Отправить</Button>
