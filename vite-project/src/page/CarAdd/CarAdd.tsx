@@ -47,11 +47,11 @@ export const CarAdd = () => {
 	})
 
 	const handleCharacteristicForm = (type, value) => {
-		console.log(type, value, 'handleCharacteristicForm')
+		// console.log(type, value, 'handleCharacteristicForm')s
 		setCharacteristicForm(prev => ({ ...prev, [type]: value }))
 	}
 
-	console.log(characteristicForm, 'characteristicForm')
+	// console.log(characteristicForm, 'characteristicForm')
 
 	const onSubmit = async item => {
 		const data = {
@@ -83,6 +83,8 @@ export const CarAdd = () => {
 				}
 			)
 			const resCarId = res.data.data.id
+
+			console.log(resCarId, 'car-id')
 			getUsers(resCarId)
 
 			console.log(res.data, 'res-data')
@@ -116,14 +118,14 @@ export const CarAdd = () => {
 		console.log(cars)
 
 		try {
-			const res = await axios.put(
+			const res = await axios.post(
 				`http://localhost:1337/api/users/${user}?populate=*`,
-				cars,
-				{
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				}
+				cars
+				// {
+				// 	headers: {
+				// 		Authorization: `Bearer ${token}`,
+				// 	},
+				// }
 			)
 			console.log(res.data, 'user - res')
 		} catch (err) {

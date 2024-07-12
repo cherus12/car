@@ -7,6 +7,7 @@ import {
 	FormControl,
 	MenuItem,
 	Select,
+	styled,
 	TextField,
 } from '@mui/material'
 import { FiltersFormModal } from './FiltersFormModal/FiltersFormModal.js'
@@ -17,6 +18,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setFilter } from '../../slice/filterSlice.js'
 import { queryModel } from '../../api/query.js'
 import { isOperator } from '@strapi/utils'
+import { CustomFormControl } from '../../Ui/Form/FormControl.js'
 
 export const FIltersForm = () => {
 	const [mark, setMark] = useState(null)
@@ -30,7 +32,7 @@ export const FIltersForm = () => {
 		mark: null,
 		body: null,
 		box: null,
-		years: [],
+		year_of_release: [],
 		engine: null,
 		drive: null,
 		volume: [],
@@ -161,6 +163,17 @@ export const FIltersForm = () => {
 
 	// console.log(formState, 'formstate')
 
+	const CustomizedMenuItem = styled(MenuItem)`
+		color: black;
+
+		&:hover {
+			background-color: #0c78ed;
+			color: white;
+		}
+	`
+
+	console.log(formState, 'formstate')
+
 	return (
 		<form action='' onSubmit={handleSubmit(onSubmit)}>
 			<div className='cars-list-filter-border'>
@@ -216,48 +229,30 @@ export const FIltersForm = () => {
 								</div>
 								<div className='filters-form-bottom'>
 									<div className='filters-form-bottom-items'>
-										<FormControl sx={{ minWidth: 140, m: 0, height: '35px' }}>
-											<Select
-												displayEmpty
-												inputProps={{ 'aria-label': 'Without label' }}
-												value={formState.body || 'Кузов'}
-												sx={{ height: 35 }}
-												onChange={e => {
-													handleRangeChange('body', e.target.value)
-												}}
-											>
-												<MenuItem value={'Кузов'} sx={{ color: 'black' }}>
-													<p>Кузов</p>
-												</MenuItem>
-												<MenuItem value={'Седан'} sx={{ color: 'black' }}>
-													Седан
-												</MenuItem>
-											</Select>
-										</FormControl>
-										<FormControl sx={{ minWidth: 140, m: 0, height: '35px' }}>
-											<Select
-												displayEmpty
-												inputProps={{ 'aria-label': 'Without label' }}
-												value={formState.box || 'Коробка'}
-												onChange={e => {
-													handleRangeChange('box', e.target.value)
-												}}
-												sx={{ height: 35 }}
-											>
-												<MenuItem value={'Коробка'} sx={{ color: 'black' }}>
-													<p>Коробка</p>
-												</MenuItem>
-												<MenuItem
-													value={'Автоматическая'}
-													sx={{ color: 'black' }}
-												>
-													Автоматическая
-												</MenuItem>
-											</Select>
-										</FormControl>
+										<CustomFormControl
+											formState={formState.body}
+											type={'body'}
+											initialState={'Кузов'}
+											handleRangeChange={handleRangeChange}
+										>
+											<CustomizedMenuItem value='Седан'>
+												Седан
+											</CustomizedMenuItem>
+											<CustomizedMenuItem value='Прямой'>
+												Прямой
+											</CustomizedMenuItem>
+										</CustomFormControl>
+										<CustomFormControl
+											formState={formState.box}
+											type={'box'}
+											initialState={'Коробка'}
+											handleRangeChange={handleRangeChange}
+										>
+											<CustomizedMenuItem value='box'>Да</CustomizedMenuItem>
+										</CustomFormControl>
 									</div>
 									<div className='filters-form-bottom-items'>
-										<FormControl sx={{ minWidth: 140, m: 0, height: '35px' }}>
+										{/* <FormControl sx={{ minWidth: 140, m: 0, height: '35px' }}>
 											<Select
 												displayEmpty
 												inputProps={{ 'aria-label': 'Without label' }}
@@ -274,25 +269,50 @@ export const FIltersForm = () => {
 													2024
 												</MenuItem>
 											</Select>
-										</FormControl>
-										<FormControl sx={{ minWidth: 140, m: 0, height: '35px' }}>
+										</FormControl> */}
+										<CustomFormControl
+											formState={formState.year_of_release[0]}
+											type={'year_of_release'}
+											initialState={'Год от'}
+											handleRangeChange={handleRangeChange}
+											operator={'$gte'}
+										>
+											<CustomizedMenuItem value='2024'>2024</CustomizedMenuItem>
+											<CustomizedMenuItem value='2025'>2025</CustomizedMenuItem>
+										</CustomFormControl>
+										<CustomFormControl
+											formState={formState.year_of_release[1]}
+											type={'year_of_release'}
+											initialState={'Год до'}
+											handleRangeChange={handleRangeChange}
+											operator={'$lte'}
+										>
+											<CustomizedMenuItem value='2024'>1000</CustomizedMenuItem>
+											<CustomizedMenuItem value='2024'>2024</CustomizedMenuItem>
+											<CustomizedMenuItem value='2025'>2025</CustomizedMenuItem>
+										</CustomFormControl>
+										{/* <FormControl sx={{ minWidth: 140, m: 0, height: '35px' }}>
 											<Select
 												displayEmpty
 												inputProps={{ 'aria-label': 'Without label' }}
-												value={formState.years[1] || 'до'}
+												value={formState.year_of_release[1] || 'до'}
 												onChange={e =>
-													handleRangeChange('years', e.target.value, '$lte')
+													handleRangeChange(
+														'year_of_release',
+														e.target.value,
+														'$lte'
+													)
 												}
 												sx={{ height: 35 }}
 											>
 												<MenuItem value={'до'} sx={{ color: 'black' }}>
 													<p>до</p>
 												</MenuItem>
-												<MenuItem value={'2023'} sx={{ color: 'black' }}>
-													2023
+												<MenuItem value={'1000'} sx={{ color: 'black' }}>
+													1000
 												</MenuItem>
 											</Select>
-										</FormControl>
+										</FormControl> */}
 									</div>
 								</div>
 							</div>
@@ -321,7 +341,7 @@ export const FIltersForm = () => {
 								</div>
 								<div className='filters-form-bottom'>
 									<div className='filters-form-bottom-items'>
-										<FormControl sx={{ minWidth: 140, m: 0, height: '35px' }}>
+										{/* <FormControl sx={{ minWidth: 140, m: 0, height: '35px' }}>
 											<Select
 												displayEmpty
 												inputProps={{ 'aria-label': 'Without label' }}
@@ -338,8 +358,24 @@ export const FIltersForm = () => {
 													Бензин
 												</MenuItem>
 											</Select>
-										</FormControl>
-										<FormControl sx={{ minWidth: 140, m: 0, height: '35px' }}>
+										</FormControl> */}
+										<CustomFormControl
+											formState={formState.engine}
+											type={'engine'}
+											initialState={'Двигатель'}
+											handleRangeChange={handleRangeChange}
+										>
+											<CustomizedMenuItem value='Бензин'>
+												Бензин
+											</CustomizedMenuItem>
+											<CustomizedMenuItem value='Дизель'>
+												Дизель
+											</CustomizedMenuItem>
+											<CustomizedMenuItem value='Электро'>
+												Электро
+											</CustomizedMenuItem>
+										</CustomFormControl>
+										{/* <FormControl sx={{ minWidth: 140, m: 0, height: '35px' }}>
 											<Select
 												displayEmpty
 												inputProps={{ 'aria-label': 'Without label' }}
@@ -359,7 +395,23 @@ export const FIltersForm = () => {
 													Передний
 												</MenuItem>
 											</Select>
-										</FormControl>
+										</FormControl> */}
+										<CustomFormControl
+											formState={formState.drive}
+											type={'drive'}
+											initialState={'Привод'}
+											handleRangeChange={handleRangeChange}
+										>
+											<CustomizedMenuItem value='Задний'>
+												Задний
+											</CustomizedMenuItem>
+											<CustomizedMenuItem value='Передний'>
+												Передний
+											</CustomizedMenuItem>
+											<CustomizedMenuItem value='Полный'>
+												Полный
+											</CustomizedMenuItem>
+										</CustomFormControl>
 									</div>
 									<div className='filters-form-bottom-items'>
 										<input
@@ -400,7 +452,7 @@ export const FIltersForm = () => {
 								</div>
 								<div className='filters-form-bottom'>
 									<div className='filters-form-bottom-items'>
-										<FormControl
+										{/* <FormControl
 											sx={{ minWidth: 140, m: 0, maxHeight: '35px' }}
 										>
 											<Select
@@ -422,8 +474,19 @@ export const FIltersForm = () => {
 													0.2 л
 												</MenuItem>
 											</Select>
-										</FormControl>
-										<FormControl sx={{ minWidth: 140, m: 0, height: '35px' }}>
+										</FormControl> */}
+										<CustomFormControl
+											formState={formState.volume[0]}
+											type={'volume'}
+											initialState={'Объем от, л'}
+											handleRangeChange={handleRangeChange}
+											operator={'$gte'}
+										>
+											<CustomizedMenuItem value='0.1'>0.1</CustomizedMenuItem>
+											<CustomizedMenuItem value='0.2'>0.2</CustomizedMenuItem>
+											<CustomizedMenuItem value='0.3'>0.3</CustomizedMenuItem>
+										</CustomFormControl>
+										{/* <FormControl sx={{ minWidth: 140, m: 0, height: '35px' }}>
 											<Select
 												displayEmpty
 												inputProps={{ 'aria-label': 'Without label' }}
@@ -444,7 +507,18 @@ export const FIltersForm = () => {
 												</MenuItem>
 												=
 											</Select>
-										</FormControl>
+										</FormControl> */}
+										<CustomFormControl
+											formState={formState.volume[1]}
+											type={'volume'}
+											initialState={'Объем до, л'}
+											handleRangeChange={handleRangeChange}
+											operator={'$lte'}
+										>
+											<CustomizedMenuItem value='0.1'>0.1</CustomizedMenuItem>
+											<CustomizedMenuItem value='0.2'>0.2</CustomizedMenuItem>
+											<CustomizedMenuItem value='0.3'>0.3</CustomizedMenuItem>
+										</CustomFormControl>
 									</div>
 									<div className='filters-form-bottom-items'>
 										<input

@@ -23,9 +23,10 @@ import useFetch from '../../hooks/useFetch.jsx'
 import { Link, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { buildQueryString } from '../../api/query.js'
+import { ListingFilter } from '../../components/ListingFilter/ListingFilter.js'
+import { SmallArrow } from '../../Ui/Arrow/SmallArrow.js'
 
 export const CarsList = () => {
-	const [age, setAge] = React.useState('')
 	const [page, setPage] = useState(1)
 	// const [isFetching, setIsFetching] = useState(true)
 	const [allData, setAllData] = useState([])
@@ -37,10 +38,13 @@ export const CarsList = () => {
 	const filter = useSelector(state => state.filter.body)
 
 	const d = Object.entries(filter).filter(
-		item => typeof item[1] == 'string' || typeof item[1] == 'number'
+		item =>
+			typeof item[1] == 'string' ||
+			typeof item[1] == 'number' ||
+			Array.isArray(item[1])
 	)
 
-	// console.log(d, 'filter')
+	// console.log(y, 'filter')
 
 	// if (Object.entries(filter)) {
 	// 	console.log(Object.entries(filter), 'есть')
@@ -100,63 +104,11 @@ export const CarsList = () => {
 						<li>до 50 000$</li>
 						<li>до 50 000$</li>
 					</ul>
-					<ArrowCircleRight
-						style={{
-							color: 'grey',
-							position: 'absolute',
-							right: '20px',
-							top: '0',
-							rotate: '180deg',
-							cursor: 'pointer',
-						}}
-					></ArrowCircleRight>
-					<ArrowCircleRight
-						style={{
-							color: 'grey',
-							position: 'absolute',
-							right: '0',
-							top: '0',
-							cursor: 'pointer',
-						}}
-					></ArrowCircleRight>
+					<SmallArrow rotate='180deg' right='20px'></SmallArrow>
+					<SmallArrow right='0'></SmallArrow>
 				</div>
 
-				<div className='listing-filter'>
-					<div className='filters-form-bottom-items'>
-						<FormControl sx={{ m: 1, minWidth: 120 }}>
-							<Select
-								value={age}
-								displayEmpty
-								inputProps={{ 'aria-label': 'Without label' }}
-							>
-								<MenuItem value=''>
-									<em>Седан</em>
-								</MenuItem>
-								<MenuItem value={10}>Ten</MenuItem>
-								<MenuItem value={20}>Twenty</MenuItem>
-								<MenuItem value={30}>Thirty</MenuItem>
-							</Select>
-						</FormControl>
-						<FormControl sx={{ m: 1, minWidth: 120 }}>
-							<Select
-								value={age}
-								displayEmpty
-								inputProps={{ 'aria-label': 'Without label' }}
-							>
-								<MenuItem value=''>
-									<em>Коробка</em>
-								</MenuItem>
-								<MenuItem value={10}>Ten</MenuItem>
-								<MenuItem value={20}>Twenty</MenuItem>
-								<MenuItem value={30}>Thirty</MenuItem>
-							</Select>
-						</FormControl>
-					</div>
-					<div className='show-discounts'>
-						<input type='checkbox' />
-						<p>Показать скидки</p>
-					</div>
-				</div>
+				<ListingFilter></ListingFilter>
 
 				<div className='listing-cars-cards'>
 					{allData &&

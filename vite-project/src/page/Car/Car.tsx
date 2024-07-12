@@ -16,7 +16,10 @@ export const Car = () => {
 		setIsOpen(prev => !prev)
 	}
 
+	// let nado = Object.entries(data.attributes)
+
 	console.log(data, 'car-data?')
+	// console.log(nado, 'nado')
 
 	return (
 		<div className='car'>
@@ -136,7 +139,7 @@ export const Car = () => {
 							</div>
 						</div>
 					</div>
-					<div className='car-vin-report'>
+					{/* <div className='car-vin-report'>
 						<div className='car-vin-title'>
 							<h1>История автомобиля</h1>
 						</div>
@@ -285,7 +288,7 @@ export const Car = () => {
 						<div className='car-vin-button'>
 							<button>Купить отчет от 100Р</button>
 						</div>
-					</div>
+					</div> */}
 					<div className='car-owner-comment'>
 						<h1>Комментарий продавца</h1>
 					</div>
