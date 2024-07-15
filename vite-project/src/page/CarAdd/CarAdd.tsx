@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import './caradd.scss'
 import { ArrowBack } from '@mui/icons-material'
 import { Button, FormControl, MenuItem, Select } from '@mui/material'
-import { useForm } from 'react-hook-form'
+import { get, useForm } from 'react-hook-form'
 import axios from 'axios'
 import useFetch from '../../hooks/useFetch.jsx'
 import { Characteristic } from '../../components/Characteristic/Characteristic.js'
@@ -11,15 +11,20 @@ import { SelectTime } from '../../Ui/Select/SelectTime.js'
 
 export const CarAdd = () => {
 	const { register, handleSubmit } = useForm()
-
+	const user = JSON.parse(localStorage.getItem('user')).id
 	const [markName, setMarkName] = useState(null)
 	const [model, setModel] = useState(null)
 	const [chooseItem, setChooseItem] = useState(null)
+	const [allUsersCars, setAllUsersCars] = useState([])
 
 	const [type, setType] = useState(null)
 	const [current, setCurrent] = useState(null)
 
 	const [files, setFiles] = useState([])
+
+	useEffect(() => {
+		getUserCars(user)
+	}, [user])
 
 	const handleFile = e => {
 		const file = e.target.files
@@ -84,8 +89,8 @@ export const CarAdd = () => {
 			)
 			const resCarId = res.data.data.id
 
-			console.log(resCarId, 'car-id')
-			getUsers(resCarId)
+			await getUserCars(user)
+			await getUsers(resCarId)
 
 			console.log(res.data, 'res-data')
 		} catch (err) {
@@ -111,25 +116,39 @@ export const CarAdd = () => {
 
 	const getUsers = async carId => {
 		const token = localStorage.getItem('token')
-		const user = JSON.parse(localStorage.getItem('user')).id
+
 		const cars = {
-			cars: carId,
+			cars: [...allUsersCars, carId],
 		}
-		console.log(cars)
 
 		try {
-			const res = await axios.post(
+			const res = await axios.put(
 				`http://localhost:1337/api/users/${user}?populate=*`,
-				cars
-				// {
-				// 	headers: {
-				// 		Authorization: `Bearer ${token}`,
-				// 	},
-				// }
+				cars,
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
 			)
 			console.log(res.data, 'user - res')
 		} catch (err) {
 			console.log(err, 'error user')
+		}
+	}
+
+	const getUserCars = async user => {
+		try {
+			const res = await axios.get(
+				`http://localhost:1337/api/users/${user}?populate=*`
+			)
+
+			const allCars = res.data
+
+			const carsId = allCars?.cars.map(item => item.id)
+			setAllUsersCars(carsId)
+		} catch (err) {
+			console.log(err, 'error')
 		}
 	}
 
@@ -144,8 +163,6 @@ export const CarAdd = () => {
 
 		setChooseItem(converted)
 	}
-
-	// console.log(chooseItem, 'chooseitem')
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
