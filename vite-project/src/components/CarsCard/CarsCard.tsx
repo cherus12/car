@@ -1,4 +1,5 @@
 import React from 'react'
+import './carscard.scss'
 
 export const CarsCard = ({ item }) => {
 	const photoURL = item?.photo?.data[0].attributes?.url || `/uploads/btw.jpg`
@@ -33,13 +34,13 @@ export const CarsCard = ({ item }) => {
 						<div>Отчет Авто.ру</div>
 					</div>
 				</div>
-				<div className='listing-cars-card-right-second'>
-					<div className='car-price'>{item?.price || '0'} ₽</div>
-					<div className='car-second-info'>
-						<div className='car-year'>{item?.year_of_release || '0'}</div>
-						<div className='car-mileage'>{item?.mileage || '0'} km</div>
-					</div>
-				</div>
+				<div className='car-price'>{item?.price || '0'} ₽</div>
+				{/* <div className='car-second-info'> */}
+				<div className='car-year'>{item?.year_of_release || '0'}</div>
+				<div className='car-mileage'>{item?.mileage || '0'} km</div>
+				{/* <div className='listing-cars-card-right-second'> */}
+				{/* </div> */}
+				{/* </div> */}
 			</div>
 		</div>
 	)

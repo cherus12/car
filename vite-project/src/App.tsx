@@ -34,17 +34,17 @@ const router = createBrowserRouter([
 				element: <Car></Car>,
 			},
 			{
-				path: '/car/add',
+				path: '/car/ad',
 				element: <CarAdd></CarAdd>,
 			},
-			{
-				path: '/login',
-				element: <Login></Login>,
-			},
-			{ path: '/register', element: <Register></Register> },
 			{ path: '/my', element: <MyAds></MyAds> },
 		],
 	},
+	{
+		path: '/login',
+		element: <Login></Login>,
+	},
+	{ path: '/register', element: <Register></Register> },
 ])
 
 function App() {

@@ -82,6 +82,12 @@
     },
     "phone": {
       "type": "string"
+    },
+    "chats": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::chat.chat",
+      "mappedBy": "cars"
     }
   }
 }

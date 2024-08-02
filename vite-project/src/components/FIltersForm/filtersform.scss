@@ -1,9 +1,14 @@
 .filters-form {
-	display: flex;
+	width: 100%;
+	// display: flex;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
 	gap: 20px;
 	.filters-form-item {
+		flex: 33.3%;
 		margin-top: 10px;
 		.filters-form-top {
+			width: 100%;
 			display: flex;
 			align-items: center;
 
@@ -38,6 +43,7 @@
 
 		.filters-form-bottom {
 			.filters-form-bottom-items {
+				width: 100%;
 				display: flex;
 				align-items: center;
 				margin-top: 15px;
@@ -52,13 +58,29 @@
 				}
 
 				.input-item {
-					width: 130px;
+					width: 100%;
 					height: 32px;
 					outline: none;
 					padding-left: 8px;
 					border-radius: 5px;
 					border: 1px solid rgb(182, 181, 181);
 					color: black;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 1229px) {
+	.filters-form {
+		.filters-form-item {
+			.filters-form-bottom {
+				.filters-form-bottom-items {
+					.input-item {
+					}
+
+					.filters-form-bottom-item-control {
+					}
 				}
 			}
 		}

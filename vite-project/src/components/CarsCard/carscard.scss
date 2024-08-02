@@ -1,0 +1,152 @@
+.listing-cars-cards {
+	width: 100%;
+	height: 100%;
+	.listing-cars-card {
+		width: 100%;
+		height: 203px;
+		background-color: white;
+		border-radius: 5px;
+		display: flex;
+		// align-items: center;
+		padding: 15px 16px;
+
+		.listing-cars-card-left {
+			// flex: 25%;
+			height: inherit;
+
+			img {
+				width: 205px;
+				height: 154px;
+				border-radius: 5px;
+			}
+		}
+		.listing-cars-card-right {
+			width: 100%;
+			display: grid;
+			grid-template-columns: 4fr 2fr 1fr 3fr;
+			// justify-content: space-between;
+			padding: 0 20px;
+			color: black;
+
+			.listing-cars-card-right-first {
+				height: 100%;
+				white-space: nowrap;
+
+				.car-title {
+					h3 {
+						margin: 0;
+						color: black;
+					}
+
+					padding-right: 10px;
+				}
+
+				.car-info {
+					display: flex;
+					margin-top: 15px;
+
+					.car-info-item {
+						color: grey;
+					}
+
+					.car-info-left {
+						flex-shrink: 1;
+						flex-grow: 0;
+					}
+
+					.car-info-right {
+						padding-left: 30px;
+					}
+				}
+
+				.car-additional-info {
+					display: flex;
+					align-items: center;
+					margin-top: 15px;
+					gap: 5px;
+
+					div {
+						background-color: rgb(208, 206, 206);
+						color: #0d77eb;
+						padding: 4px 12px;
+						border-radius: 5px;
+						font-size: 15px;
+					}
+				}
+			}
+			.listing-cars-card-right-second {
+				display: flex;
+				white-space: nowrap;
+				gap: 50px;
+				color: black;
+
+				.car-price {
+					// width: 120px;
+					// width: 50%;
+					color: black;
+				}
+
+				// .car-second-info {
+				// 	display: flex;
+				// 	gap: 15px;
+				// 	color: black;
+				// }
+			}
+		}
+
+		&:hover {
+			box-shadow: 0 2px 16px rgba(19, 20, 22, 0.12156862);
+			cursor: pointer;
+		}
+	}
+}
+
+@media (max-width: 1434px) {
+	.listing-cars-cards {
+		.listing-cars-card {
+			.listing-cars-card-right {
+				.listing-cars-card-right-first {
+					padding: 0 5px;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 1287px) {
+	.listing-cars-cards {
+		.listing-cars-card {
+			.listing-cars-card-right {
+				grid-template-columns: 4fr 4fr 3fr 3fr;
+
+				.listing-cars-card-right-first {
+					.car-title {
+						font-size: 15px;
+					}
+				}
+
+				.listing-cars-card-right-second {
+					gap: 30px;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 1162px) {
+	.listing-cars-cards {
+		.listing-cars-card {
+			.listing-cars-card-right {
+				.listing-cars-card-right-first {
+					.car-title {
+						font-size: 15px;
+					}
+				}
+
+				.listing-cars-card-right-second {
+					gap: 15px;
+				}
+			}
+		}
+	}
+}

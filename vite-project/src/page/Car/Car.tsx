@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './car.scss'
 import { ArrowBack, Message, Photo } from '@mui/icons-material'
 import axios from 'axios'
@@ -10,9 +10,66 @@ import { Chat } from '../../components/Chat/Chat.tsx'
 export const Car = () => {
 	const data = useLocation().state
 
+	const userId = JSON.parse(localStorage.getItem('user')).id
+	const token = localStorage.getItem('token')
+
+	const seller = data?.attributes?.users_permissions_users.data[0]?.id
+	const chat_id = Number(userId?.toString() + seller?.toString())
+	const chat_id_reverse = seller?.toString() + userId?.toString()
+
+	console.log(chat_id, 'chat_id')
+
+	console.log(userId, 'userID')
+
 	const [isOpen, setIsOpen] = useState(false)
 
-	const handleClick = () => {
+	const getChatId = async () => {
+		try {
+			const res = await axios.get(
+				`http://localhost:1337/api/chats?populate=*&[filters][chat_id][$in]=${chat_id}&[filters][chat_id_reverse][$in]=${chat_id_reverse}`
+			)
+
+			return res.data
+		} catch (err) {
+			console.log(err, 'getChatId error')
+		}
+	}
+
+	const handleClick = async () => {
+		const chatData = await getChatId()
+		const chatDataId = chatData?.data[0]?.attributes?.chat_id
+
+		console.log(chatData, 'chatdata')
+		console.log(chatDataId, 'chatDataId')
+
+		if (chatDataId === undefined && userId !== seller) {
+			try {
+				const res = await axios.post(
+					`http://localhost:1337/api/chats`,
+					{
+						data: {
+							chat_id,
+							chat_id_reverse,
+							messages: [],
+							users: [userId, seller],
+							cars: data.id,
+							car_buyer: userId,
+							car_seller: seller,
+						},
+					},
+					{
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
+					}
+				)
+
+				console.log(res.data, 'chat-data')
+			} catch (err) {
+				console.log(err, 'err')
+			}
+		}
+
 		setIsOpen(prev => !prev)
 	}
 
@@ -139,156 +196,11 @@ export const Car = () => {
 							</div>
 						</div>
 					</div>
-					{/* <div className='car-vin-report'>
-						<div className='car-vin-title'>
-							<h1>История автомобиля</h1>
-						</div>
-						<div className='car-vin-id'>XTA*********</div>
-						<div className='car-vin-info'>
-							<div className='car-vin-info-item'>
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									fill='none'
-									viewBox='0 0 24 24'
-									className='IconWithLock__icon-QPoKJ'
-								>
-									<path
-										fill='currentColor'
-										fill-rule='evenodd'
-										d='M16 7c0-2-1.293-4-4-4-2.708 0-4 2-4 4s1.5 5 4 5 4-3 4-5m1.376 8.702a9.3 9.3 0 0 1 2.397 2.458l.227.34V21H4v-2.5l.227-.34a9.34 9.34 0 0 1 13.149-2.458'
-										clip-rule='evenodd'
-									></path>
-								</svg>
-								<div className='car-vin-info__item'>
-									<div className='car-vin-info__item-title'>
-										Владельцы по ПТС
-									</div>
-									<div className='car-vin-info__item-desc'>
-										4 владельца по ПТС
-									</div>
-								</div>
-							</div>
-							<div className='car-vin-info-item'>
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									fill='none'
-									viewBox='0 0 24 24'
-									className='IconWithLock__icon-QPoKJ'
-								>
-									<path
-										fill='currentColor'
-										fill-rule='evenodd'
-										d='M16 7c0-2-1.293-4-4-4-2.708 0-4 2-4 4s1.5 5 4 5 4-3 4-5m1.376 8.702a9.3 9.3 0 0 1 2.397 2.458l.227.34V21H4v-2.5l.227-.34a9.34 9.34 0 0 1 13.149-2.458'
-										clip-rule='evenodd'
-									></path>
-								</svg>
-								<div className='car-vin-info__item'>
-									<div className='car-vin-info__item-title'>
-										Владельцы по ПТС
-									</div>
-									<div className='car-vin-info__item-desc'>
-										4 владельца по ПТС
-									</div>
-								</div>
-							</div>
-							<div className='car-vin-info-item'>
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									fill='none'
-									viewBox='0 0 24 24'
-									className='IconWithLock__icon-QPoKJ'
-								>
-									<path
-										fill='currentColor'
-										fill-rule='evenodd'
-										d='M16 7c0-2-1.293-4-4-4-2.708 0-4 2-4 4s1.5 5 4 5 4-3 4-5m1.376 8.702a9.3 9.3 0 0 1 2.397 2.458l.227.34V21H4v-2.5l.227-.34a9.34 9.34 0 0 1 13.149-2.458'
-										clip-rule='evenodd'
-									></path>
-								</svg>
-								<div className='car-vin-info__item'>
-									<div className='car-vin-info__item-title'>
-										Владельцы по ПТС
-									</div>
-									<div className='car-vin-info__item-desc'>
-										4 владельца по ПТС
-									</div>
-								</div>
-							</div>
-							<div className='car-vin-info-item'>
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									fill='none'
-									viewBox='0 0 24 24'
-									className='IconWithLock__icon-QPoKJ'
-								>
-									<path
-										fill='currentColor'
-										fill-rule='evenodd'
-										d='M16 7c0-2-1.293-4-4-4-2.708 0-4 2-4 4s1.5 5 4 5 4-3 4-5m1.376 8.702a9.3 9.3 0 0 1 2.397 2.458l.227.34V21H4v-2.5l.227-.34a9.34 9.34 0 0 1 13.149-2.458'
-										clip-rule='evenodd'
-									></path>
-								</svg>
-								<div className='car-vin-info__item'>
-									<div className='car-vin-info__item-title'>
-										Владельцы по ПТС
-									</div>
-									<div className='car-vin-info__item-desc'>
-										4 владельца по ПТС
-									</div>
-								</div>
-							</div>
-
-							<div className='car-vin-info-item'>
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									fill='none'
-									viewBox='0 0 24 24'
-									className='IconWithLock__icon-QPoKJ'
-								>
-									<path
-										fill='currentColor'
-										fill-rule='evenodd'
-										d='M16 7c0-2-1.293-4-4-4-2.708 0-4 2-4 4s1.5 5 4 5 4-3 4-5m1.376 8.702a9.3 9.3 0 0 1 2.397 2.458l.227.34V21H4v-2.5l.227-.34a9.34 9.34 0 0 1 13.149-2.458'
-										clip-rule='evenodd'
-									></path>
-								</svg>
-								<div className='car-vin-info__item'>
-									<div className='car-vin-info__item-title'>
-										Владельцы по ПТС
-									</div>
-									<div className='car-vin-info__item-desc'>
-										4 владельца по ПТС
-									</div>
-								</div>
-							</div>
-							<div className='car-vin-info-item'>
-								<svg
-									xmlns='http://www.w3.org/2000/svg'
-									fill='none'
-									viewBox='0 0 24 24'
-									className='IconWithLock__icon-QPoKJ'
-								>
-									<path
-										fill='currentColor'
-										fill-rule='evenodd'
-										d='M16 7c0-2-1.293-4-4-4-2.708 0-4 2-4 4s1.5 5 4 5 4-3 4-5m1.376 8.702a9.3 9.3 0 0 1 2.397 2.458l.227.34V21H4v-2.5l.227-.34a9.34 9.34 0 0 1 13.149-2.458'
-										clip-rule='evenodd'
-									></path>
-								</svg>
-								<div className='car-vin-info__item'>
-									<div className='car-vin-info__item-title'>
-										Владельцы по ПТС
-									</div>
-									<div className='car-vin-info__item-desc'>
-										4 владельца по ПТС
-									</div>
-								</div>
-							</div>
-						</div>
+					<div className='car-vin-report'>
 						<div className='car-vin-button'>
 							<button>Купить отчет от 100Р</button>
 						</div>
-					</div> */}
+					</div>
 					<div className='car-owner-comment'>
 						<h1>Комментарий продавца</h1>
 					</div>

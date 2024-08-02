@@ -61,6 +61,7 @@
 
 						.chat-card-subject {
 							color: grey;
+							margin-top: 3px;
 						}
 					}
 
@@ -115,7 +116,22 @@
 			.messages {
 				width: 100%;
 				height: 70%;
-				padding-bottom: 10px;
+
+				.message-user {
+					width: 100%;
+					display: flex;
+					// flex-direction: row-reverse;
+
+					.message-user-info {
+						display: flex;
+						.message-user-photo {
+						}
+						.message-user-name {
+						}
+					}
+					.message-user-text {
+					}
+				}
 			}
 
 			.chat-input {
@@ -126,6 +142,7 @@
 					border-radius: 25px;
 					padding: 7px 20px;
 					display: flex;
+					position: relative;
 
 					.chat-icons {
 						img {
@@ -134,13 +151,14 @@
 						}
 					}
 					.chat-input-text {
-						width: 100%;
+						width: 80%;
 						height: 40px;
 						display: flex;
 						align-items: center;
 						.chat-input-textarea {
 							display: block;
-							overflow: hidden;
+							overflow-y: scroll;
+							scrollbar-width: 0;
 							box-sizing: border-box;
 							width: 100%;
 							padding-top: 15px;
@@ -148,7 +166,23 @@
 							border: none;
 							outline: none;
 							background-color: initial;
+
+							&::-webkit-scrollbar {
+								width: 0;
+							}
 						}
+					}
+
+					.chat-text-button {
+						position: absolute;
+						right: 2%;
+						outline: 0;
+						border: 0;
+						padding: 15px 10px;
+						border-radius: 25px;
+						background-color: blueviolet;
+						cursor: pointer;
+						color: white;
 					}
 				}
 			}

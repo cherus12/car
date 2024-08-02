@@ -775,6 +775,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToMany',
       'api::car.car'
     >;
+    chats: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'manyToMany',
+      'api::chat.chat'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -828,12 +833,46 @@ export interface ApiCarCar extends Schema.CollectionType {
       'plugin::users-permissions.user'
     >;
     phone: Attribute.String;
+    chats: Attribute.Relation<'api::car.car', 'manyToMany', 'api::chat.chat'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::car.car', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::car.car', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiChatChat extends Schema.CollectionType {
+  collectionName: 'chats';
+  info: {
+    singularName: 'chat';
+    pluralName: 'chats';
+    displayName: 'Chat';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    messages: Attribute.JSON;
+    users: Attribute.Relation<
+      'api::chat.chat',
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
+    chat_id: Attribute.Integer;
+    chat_id_reverse: Attribute.Integer;
+    cars: Attribute.Relation<'api::chat.chat', 'manyToMany', 'api::car.car'>;
+    car_buyer: Attribute.Integer;
+    car_seller: Attribute.Integer;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::chat.chat', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::chat.chat', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -929,6 +968,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::car.car': ApiCarCar;
+      'api::chat.chat': ApiChatChat;
       'api::mark.mark': ApiMarkMark;
       'api::model.model': ApiModelModel;
     }

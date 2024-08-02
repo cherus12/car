@@ -30,19 +30,19 @@ export const Navbar = () => {
 					<li className='navbar-link'>
 						<a href=''>Кредиты</a>
 					</li>
-					<li className='navbar-link'>
+					<li className='navbar-link close'>
 						<a href=''>Оценка авто</a>
 					</li>
-					<li className='navbar-link'>
+					<li className='navbar-link close'>
 						<a href=''>Страховки</a>
 					</li>
-					<li className='navbar-link'>
+					<li className='navbar-link close'>
 						<a href=''>Гараж</a>
 					</li>
-					<li className='navbar-link'>
+					<li className='navbar-link close'>
 						<a href=''>Журнал</a>
 					</li>
-					<li className='navbar-link'>
+					<li className='navbar-link close'>
 						<a href=''>Для бизнеса</a>
 					</li>
 				</ul>

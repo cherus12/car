@@ -16,7 +16,6 @@ export const FiltersFormModal = ({
 							mark == 'models'
 								? handleChangeModel(`${item.attributes.title}`)
 								: handleChange(`${item.attributes.title}`)
-							// handleChange(`${item.attributes.title}`, mark)
 						}}
 						key={item.attributes.id}
 					>

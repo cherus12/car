@@ -11,7 +11,7 @@ export const Home = () => {
 	return (
 		<div className='main'>
 			<div className='main__container'>
-				<h1>Легковые автомобили</h1>
+				<h1 className='main-title'>Легковые автомобили</h1>
 				<div className='buttons-group'>
 					<ButtonsGroup></ButtonsGroup>
 				</div>

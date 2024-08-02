@@ -62,12 +62,28 @@
 	svg {
 		width: 24px;
 	}
+}
 
+.header-button-ad {
 	a {
 		border: 1px solid #36b555;
 		background-color: #36b555;
 		padding: 10px 12px;
 		border-radius: 5px;
 		margin-left: 10px;
+		white-space: nowrap;
 	}
 }
+
+.header__auth-button {
+	border: 1px solid white;
+	border-radius: 10px;
+	padding: 10px 20px;
+	color: black;
+	background-color: white;
+}
+
+// @media (max-width: 1050) {
+// 	.header-link-item {
+// 	}
+// }

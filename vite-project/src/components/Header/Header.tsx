@@ -418,12 +418,12 @@ export default function Header() {
 								<AccountCircle />
 							</IconButton>
 						) : (
-							<a href='/login'>
-								<button onClick={() => loginWithRedirect()}>Login</button>
+							<a href='/login' className='header__auth-button'>
+								Войти
 							</a>
 						)}
-						<div className='header-link-item'>
-							<a href='/car/add'>Разместить объявления</a>
+						<div className='header-button-ad'>
+							<a href='/car/ad'>Разместить объявления</a>
 						</div>
 					</Box>
 					<Box sx={{ display: { xs: 'flex', md: 'none' } }}>

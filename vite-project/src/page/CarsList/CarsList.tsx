@@ -44,14 +44,6 @@ export const CarsList = () => {
 			Array.isArray(item[1])
 	)
 
-	// console.log(y, 'filter')
-
-	// if (Object.entries(filter)) {
-	// 	console.log(Object.entries(filter), 'есть')
-	// } else {
-	// 	console.log('нет')
-	// }
-
 	const queryToString = buildQueryString(filter)
 
 	const { data, error, reFetch, isLoading, totalCount } = useFetch(

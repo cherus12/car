@@ -45,7 +45,6 @@
 					}
 				}
 			}
-			// background-color: black;
 			.index-marks-button {
 				position: absolute;
 				display: flex;
@@ -78,6 +77,37 @@
 			h1 {
 				margin-left: 10px;
 			}
+		}
+
+		@media (max-width: 900px) {
+			.buttons-group {
+			}
+
+			.main-title {
+				font-size: 20px;
+			}
+
+			.mark-logo-group {
+				a {
+					img {
+						width: 50px;
+						height: 50px;
+					}
+				}
+			}
+
+			.index-marks {
+				min-height: 200px;
+			}
+
+			.recommendations {
+			}
+		}
+
+		@media (min-width: 769px) {
+		}
+
+		@media (min-width: 1025px) {
 		}
 	}
 }

@@ -70,6 +70,12 @@
       "relation": "manyToMany",
       "target": "api::car.car",
       "mappedBy": "users_permissions_users"
+    },
+    "chats": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::chat.chat",
+      "mappedBy": "users"
     }
   }
 }

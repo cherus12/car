@@ -8,6 +8,7 @@ import useFetch from '../../hooks/useFetch.jsx'
 import { Characteristic } from '../../components/Characteristic/Characteristic.js'
 import { Input } from '../../Ui/Input/Input.js'
 import { SelectTime } from '../../Ui/Select/SelectTime.js'
+import { getUserCars, getUsers, carAdd } from '../../api/car-add.js'
 
 export const CarAdd = () => {
 	const { register, handleSubmit } = useForm()
@@ -23,6 +24,12 @@ export const CarAdd = () => {
 	const [files, setFiles] = useState([])
 
 	useEffect(() => {
+		// const fetchUserCars = async () => {
+		// 	const cars = await getUserCars(user)
+		// 	setAllUsersCars(cars)
+		// }
+
+		// fetchUserCars()
 		getUserCars(user)
 	}, [user])
 
@@ -52,11 +59,8 @@ export const CarAdd = () => {
 	})
 
 	const handleCharacteristicForm = (type, value) => {
-		// console.log(type, value, 'handleCharacteristicForm')s
 		setCharacteristicForm(prev => ({ ...prev, [type]: value }))
 	}
-
-	// console.log(characteristicForm, 'characteristicForm')
 
 	const onSubmit = async item => {
 		const data = {
@@ -65,10 +69,6 @@ export const CarAdd = () => {
 			mileage: Number(item.price),
 			...characteristicForm,
 		}
-
-		// console.log(data, 'dataform')
-
-		// console.log(data, 'datas')
 
 		const formData = new FormData()
 		formData.append('data', JSON.stringify(data))
@@ -96,6 +96,11 @@ export const CarAdd = () => {
 		} catch (err) {
 			console.error(err)
 		}
+		// const carId = await carAdd(data, files)
+
+		// if (carId) {
+		// 	await getUsers(carId, allUsersCars, user)
+		// }
 	}
 
 	const handleClick = event => {
@@ -110,9 +115,7 @@ export const CarAdd = () => {
 		`http://localhost:1337/api/${type}?populate=*${
 			type == 'marks' && markName && `&[filters][title][$containsi]=${markName}`
 		}${type == 'models' ? `&[filters][marks][title][$eq]=${markName}` : ''}`
-	) // console.log(data, 'data')
-
-	// console.log(type, 'type')
+	)
 
 	const getUsers = async carId => {
 		const token = localStorage.getItem('token')

@@ -18,7 +18,8 @@ export const CustomFormControl = ({
 
 	return (
 		<FormControl
-			sx={{ minWidth: 140, m: 0, maxHeight: '35px', color: 'black' }}
+			sx={{ width: '100%', m: 0, maxHeight: '35px', color: 'black' }}
+			className='filters-form-bottom-item-control'
 		>
 			<Select
 				displayEmpty

@@ -7,10 +7,9 @@
 		height: 100%;
 
 		.navbar-links {
-			width: inherit;
+			width: 100%;
 			height: inherit;
 			display: flex;
-			// align-items: center;
 			justify-content: space-between;
 			.navbar-link {
 				height: 100%;
@@ -18,11 +17,62 @@
 				align-items: center;
 				a {
 					color: white;
+					white-space: nowrap;
 					&:hover {
 						color: grey;
 					}
 				}
 			}
+		}
+	}
+}
+
+@media (max-width: 1400px) {
+	.navbar-links {
+		gap: 5px;
+	}
+}
+
+@media (max-width: 1240px) {
+	.navbar-links {
+		gap: 10px;
+
+		a {
+			font-size: 14px;
+		}
+	}
+}
+
+@media (max-width: 1050px) {
+	.navbar-links {
+		gap: 7px;
+
+		a {
+			font-size: 13px;
+		}
+	}
+}
+
+@media (max-width: 893px) {
+	.navbar-links {
+		gap: 20px;
+		a {
+			font-size: 14px;
+		}
+		.navbar-link.close {
+			opacity: 0;
+		}
+	}
+}
+
+@media (max-width: 737px) {
+	.navbar-links {
+		gap: 10px;
+		a {
+			font-size: 14px;
+		}
+		.navbar-link.close {
+			opacity: 0;
 		}
 	}
 }
