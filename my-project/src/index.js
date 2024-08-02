@@ -26,18 +26,11 @@ module.exports = {
       },
     });
 
-    let msg = [];
-
     io.on("connection", (socket) => {
       console.log("A user connected");
 
       socket.on("sendMessage", (msgs) => {
-        msg.push({
-          id: new Date().getTime(),
-          uid: socket.id,
-          msg: msgs,
-        });
-        io.emit("recvMsg", msg);
+        io.emit("recvMsg", msgs);
       });
 
       socket.on("disconnect", () => {

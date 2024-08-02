@@ -1,11 +1,13 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { io } from 'socket.io-client'
 
 export const ChatRight = ({ currentChat, chat_id }) => {
 	const [message, setMessage] = useState('')
 	const [messages, setMessages] = useState([])
 	const token = localStorage.getItem('token')
 	const user = JSON.parse(localStorage.getItem('user'))
+	const socket = io('http://localhost:1337')
 
 	const [isLoading, setIsLoading] = useState(false)
 
@@ -13,7 +15,7 @@ export const ChatRight = ({ currentChat, chat_id }) => {
 		const fetch = async () => {
 			const res = await axios.get(`http://localhost:1337/api/chats/${chat_id}`)
 
-			setMessages(res.data)
+			setMessages(res.data.data.attributes.messages)
 		}
 
 		if (chat_id) {
@@ -21,6 +23,16 @@ export const ChatRight = ({ currentChat, chat_id }) => {
 			setIsLoading(false)
 		}
 	}, [chat_id, isLoading])
+
+	useEffect(() => {
+		socket.on('recvMsg', newMessages => {
+			setMessages(prev => [...prev, newMessages])
+		})
+
+		return () => {
+			socket.off('recvMsg')
+		}
+	}, [socket])
 
 	const handleSendMessage = async () => {
 		try {
@@ -50,7 +62,8 @@ export const ChatRight = ({ currentChat, chat_id }) => {
 				}
 			)
 			setMessage('')
-			setMessages(prev => [...prev?.data?.attributes.messages, newMessage])
+			setMessages(prev => [...prev, newMessage])
+			socket.emit('sendMessage', newMessage)
 			setIsLoading(true)
 		} catch (err) {
 			console.log(err, 'handleSendMessage ERROR')
@@ -86,7 +99,7 @@ export const ChatRight = ({ currentChat, chat_id }) => {
 			<div className='chat'>
 				<div className='messages'>
 					{messages &&
-						messages?.data?.attributes.messages.map(item => (
+						messages?.map(item => (
 							<div className={`message-user`}>
 								<div className='message-user-info'>
 									<div className='message-user-photo'>1</div>

@@ -1,5 +1,4 @@
 import { io } from 'socket.io-client'
-
 import React, { useEffect } from 'react'
 
 export const useSocketQuery = () => {
