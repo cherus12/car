@@ -1,9 +1,9 @@
 module.exports = {
   routes: [
     {
-      method: "POST",
-      path: "/auth/login",
-      handler: "auth.login",
+      method: "GET",
+      path: "/test/hello",
+      handler: "test.hello",
       config: {
         policies: [],
       },

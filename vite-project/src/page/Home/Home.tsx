@@ -6,8 +6,13 @@ import { Button } from '@mui/material'
 import { Restore } from '@mui/icons-material'
 import { Link } from 'react-router-dom'
 import { IndexMarks } from '../../components/IndexMarks/IndexMarks'
+import { useSelector } from 'react-redux'
 
 export const Home = () => {
+	const user = useSelector(state => state.user.body)
+
+	console.log(user, 'user-home')
+
 	return (
 		<div className='main'>
 			<div className='main__container'>

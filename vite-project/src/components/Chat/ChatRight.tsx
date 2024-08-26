@@ -9,6 +9,9 @@ export const ChatRight = ({ currentChat, chat_id }) => {
 	const user = JSON.parse(localStorage.getItem('user'))
 	const socket = io('http://localhost:1337')
 
+	// попробовать убрать setIsLoading из useEffect
+	// попробовать убрать гет запрос на получение сообщений при отправке сообщений
+
 	const [isLoading, setIsLoading] = useState(false)
 
 	useEffect(() => {
@@ -36,11 +39,6 @@ export const ChatRight = ({ currentChat, chat_id }) => {
 
 	const handleSendMessage = async () => {
 		try {
-			const res = await axios.get(
-				`http://localhost:1337/api/chats/${currentChat?.chat_id}`
-			)
-
-			const messages = res.data.data.attributes.messages
 			const newMessage = {
 				username: user.username,
 				userId: user.id,
@@ -100,12 +98,44 @@ export const ChatRight = ({ currentChat, chat_id }) => {
 				<div className='messages'>
 					{messages &&
 						messages?.map(item => (
-							<div className={`message-user`}>
-								<div className='message-user-info'>
-									<div className='message-user-photo'>1</div>
-									<div className='message-user-name'>{item?.username}</div>
+							<div
+								className={`message-user ${
+									user.username === item.username ? 'user' : 'sender'
+								}`}
+							>
+								<div
+									className={`message-user-wrapper ${
+										user.username === item.username ? 'user' : 'sender'
+									}`}
+								>
+									{item?.username === user.username ? (
+										''
+									) : (
+										<div className='message-user-info'>
+											<div className='message-user-photo'></div>
+											<div className='message-user-name'>{item?.username}</div>
+										</div>
+									)}
+
+									<div className='message-user-text'>
+										<div className='user-message'>{item?.message}</div>
+										<div className='message-user-timestamp'>
+											{new Date().getTime() -
+												new Date(item?.timestamp).getTime() >
+											86400000
+												? new Date(item?.timestamp).toLocaleTimeString([], {
+														day: '2-digit',
+														month: '2-digit',
+														hour: '2-digit',
+														minute: '2-digit',
+												  })
+												: new Date(item?.timestamp).toLocaleTimeString([], {
+														hour: '2-digit',
+														minute: '2-digit',
+												  })}
+										</div>
+									</div>
 								</div>
-								<div className='message-user-text'>{item?.message}</div>
 							</div>
 						))}
 				</div>

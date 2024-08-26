@@ -71,10 +71,11 @@ export default function Header() {
 	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
 
 	const user = JSON.parse(localStorage.getItem('user'))
+	// const user = localStorage.getItem('user')
 
-	// console.log(user, 'user')
+	// console.log(user, 'user-HEADER')
 
-	const token = localStorage.getItem('token')
+	// const token = localStorage.getItem('token')
 
 	const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget)
@@ -330,8 +331,6 @@ export default function Header() {
 		</Menu>
 	)
 
-	const { loginWithRedirect } = useAuth0()
-
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar position='static'>
@@ -405,7 +404,7 @@ export default function Header() {
 							</svg>
 							<div>Сообщения</div>
 						</div>
-						{token ? (
+						{user ? (
 							<IconButton
 								size='large'
 								edge='end'

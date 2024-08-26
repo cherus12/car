@@ -24,12 +24,6 @@ export const CarAdd = () => {
 	const [files, setFiles] = useState([])
 
 	useEffect(() => {
-		// const fetchUserCars = async () => {
-		// 	const cars = await getUserCars(user)
-		// 	setAllUsersCars(cars)
-		// }
-
-		// fetchUserCars()
 		getUserCars(user)
 	}, [user])
 
