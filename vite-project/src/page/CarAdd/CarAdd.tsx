@@ -57,44 +57,16 @@ export const CarAdd = () => {
 	}
 
 	const onSubmit = async item => {
-		const data = {
-			...item,
-			price: Number(item.price),
-			mileage: Number(item.price),
-			...characteristicForm,
-		}
-
-		const formData = new FormData()
-		formData.append('data', JSON.stringify(data))
-
-		files.forEach((file, index) => {
-			formData.append(`files.photo`, file, file.name)
-		})
-
 		try {
-			const res = await axios.post(
-				'http://localhost:1337/api/cars?populate*=',
-				formData,
-				{
-					headers: {
-						'Content-Type': 'multipart/form-data',
-					},
-				}
-			)
-			const resCarId = res.data.data.id
+			const resCarId = await carAdd(item, files, characteristicForm)
 
-			await getUserCars(user)
-			await getUsers(resCarId)
+			setAllUsersCars(await getUserCars(user))
+			await getUsers(resCarId, allUsersCars, user)
 
-			console.log(res.data, 'res-data')
+			console.log(resCarId, 'res-data')
 		} catch (err) {
 			console.error(err)
 		}
-		// const carId = await carAdd(data, files)
-
-		// if (carId) {
-		// 	await getUsers(carId, allUsersCars, user)
-		// }
 	}
 
 	const handleClick = event => {
@@ -110,44 +82,6 @@ export const CarAdd = () => {
 			type == 'marks' && markName && `&[filters][title][$containsi]=${markName}`
 		}${type == 'models' ? `&[filters][marks][title][$eq]=${markName}` : ''}`
 	)
-
-	const getUsers = async carId => {
-		const token = localStorage.getItem('token')
-
-		const cars = {
-			cars: [...allUsersCars, carId],
-		}
-
-		try {
-			const res = await axios.put(
-				`http://localhost:1337/api/users/${user}?populate=*`,
-				cars,
-				{
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				}
-			)
-			console.log(res.data, 'user - res')
-		} catch (err) {
-			console.log(err, 'error user')
-		}
-	}
-
-	const getUserCars = async user => {
-		try {
-			const res = await axios.get(
-				`http://localhost:1337/api/users/${user}?populate=*`
-			)
-
-			const allCars = res.data
-
-			const carsId = allCars?.cars.map(item => item.id)
-			setAllUsersCars(carsId)
-		} catch (err) {
-			console.log(err, 'error')
-		}
-	}
 
 	console.log(data, 'data')
 

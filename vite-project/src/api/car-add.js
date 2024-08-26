@@ -1,6 +1,13 @@
 import axios from 'axios'
 
-export const carAdd = async (data, files) => {
+export const carAdd = async (item, files, characteristicForm) => {
+	const data = {
+		...item,
+		price: Number(item.price),
+		mileage: Number(item.price),
+		...characteristicForm,
+	}
+
 	const formData = new FormData()
 	formData.append('data', JSON.stringify(data))
 
